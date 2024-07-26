@@ -10,7 +10,7 @@ import Combine
 
 class CharacterViewModel: ObservableObject {
     @Published var model: CharacterModel
-    @Published var isEating: Bool = false
+    @Published var animationName: String = "roundel-idle"
     
     private let screenWidth: CGFloat
 
@@ -29,7 +29,7 @@ class CharacterViewModel: ObservableObject {
         model.position = screenWidth / 2
         model.targetPosition = screenWidth / 2
         model.direction = .idle
-        isEating = false
+        updateAnimationName()
     }
     
     func updateTargetPosition(_ newPosition: CGFloat) {
@@ -51,6 +51,7 @@ class CharacterViewModel: ObservableObject {
                 model.direction = .idle
             }
         }
+        updateAnimationName()
     }
     
     private func updateDirection() {
@@ -66,28 +67,25 @@ class CharacterViewModel: ObservableObject {
     func stopMovement() {
         model.isDragging = false
         model.direction = .idle
-        isEating = false
+        updateAnimationName()
     }
     
     func startEating() {
-        isEating = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2 ) { [weak self] in
-            self?.isEating = false
-        }
+        animationName = "roundel-eat"
     }
     
-    var animationName: String {
-        if isEating {
-            return "roundel-eat"
-        }
+    func stopEating() {
+        updateAnimationName()
+    }
+    
+    private func updateAnimationName() {
         switch model.direction {
         case .idle:
-            return "roundel-idle"
+            animationName = "roundel-idle"
         case .left:
-            return "roundel-walk_left"
+            animationName = "roundel-walk_left"
         case .right:
-            return "roundel-walk_right"
+            animationName = "roundel-walk_right"
         }
     }
 }
-

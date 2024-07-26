@@ -54,6 +54,9 @@
 		2CDE87812C36F99400AFB374 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE87802C36F99400AFB374 /* GameOverView.swift */; };
 		2CDE87832C36FA6800AFB374 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE87822C36FA6800AFB374 /* MenuView.swift */; };
 		2CDE87852C37059000AFB374 /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE87842C37059000AFB374 /* PauseView.swift */; };
+		2CE29A522C53BA5800868921 /* LevelCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE29A512C53BA5800868921 /* LevelCollectionView.swift */; };
+		2CE29A542C53E2A600868921 /* GameDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE29A532C53E2A600868921 /* GameDataManager.swift */; };
+		2CE29A562C53E2C100868921 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE29A552C53E2C100868921 /* GameState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +107,9 @@
 		2CDE87802C36F99400AFB374 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		2CDE87822C36FA6800AFB374 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		2CDE87842C37059000AFB374 /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
+		2CE29A512C53BA5800868921 /* LevelCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelCollectionView.swift; sourceTree = "<group>"; };
+		2CE29A532C53E2A600868921 /* GameDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataManager.swift; sourceTree = "<group>"; };
+		2CE29A552C53E2C100868921 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +223,7 @@
 			children = (
 				2C6104CE2C36EBB600BFFCFF /* CharacterModel.swift */,
 				2C6104D22C36F08800BFFCFF /* CandyModel.swift */,
+				2CE29A552C53E2C100868921 /* GameState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -227,6 +234,7 @@
 				2C6104D02C36EBEE00BFFCFF /* CharacterViewModel.swift */,
 				2C6104D42C36F0AD00BFFCFF /* CandyViewModel.swift */,
 				2C5AB7172C3960880026EA5A /* SoundManager.swift */,
+				2CE29A532C53E2A600868921 /* GameDataManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -239,6 +247,7 @@
 				2CDE87822C36FA6800AFB374 /* MenuView.swift */,
 				2CDE87842C37059000AFB374 /* PauseView.swift */,
 				2CDE87802C36F99400AFB374 /* GameOverView.swift */,
+				2CE29A512C53BA5800868921 /* LevelCollectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -352,7 +361,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CE29A542C53E2A600868921 /* GameDataManager.swift in Sources */,
 				2C18BC332BBC157C0009A462 /* ContentView.swift in Sources */,
+				2CE29A522C53BA5800868921 /* LevelCollectionView.swift in Sources */,
 				2C6104D52C36F0AD00BFFCFF /* CandyViewModel.swift in Sources */,
 				2C6104D12C36EBEE00BFFCFF /* CharacterViewModel.swift in Sources */,
 				2C6104CF2C36EBB600BFFCFF /* CharacterModel.swift in Sources */,
@@ -361,6 +372,7 @@
 				2C18BC312BBC157C0009A462 /* Chubby_Chowdown_Sweet_Delight_DropApp.swift in Sources */,
 				2CDE87852C37059000AFB374 /* PauseView.swift in Sources */,
 				2CDE87812C36F99400AFB374 /* GameOverView.swift in Sources */,
+				2CE29A562C53E2C100868921 /* GameState.swift in Sources */,
 				2C5AB7182C3960880026EA5A /* SoundManager.swift in Sources */,
 				2C6104CB2C36BCFB00BFFCFF /* GameView.swift in Sources */,
 			);

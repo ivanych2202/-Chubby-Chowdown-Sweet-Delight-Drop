@@ -27,6 +27,7 @@ struct GameOverView: View {
             
             HStack(spacing: 20) {
                 Button("Restart") {
+                    GameDataManager.shared.clearSavedGame()
                     onRestart()
                 }
                 .padding()
@@ -35,6 +36,7 @@ struct GameOverView: View {
                 .cornerRadius(10)
                 
                 Button("Menu") {
+                    GameDataManager.shared.clearSavedGame()
                     onMenu()
                 }
                 .padding()
@@ -46,5 +48,8 @@ struct GameOverView: View {
         .padding()
         .background(Color.black.opacity(0.7))
         .cornerRadius(20)
+        .onAppear {
+            GameDataManager.shared.clearSavedGame()
+        }
     }
 }

@@ -34,22 +34,24 @@ class CandyViewModel: ObservableObject {
         candies.removeAll()
         score = 0
         isGameOver = false
+        isPaused = false
     }
     
     func updateGameState() {
-        if !isPaused {
+        if !isPaused && !isGameOver {
             updateCandyPositions()
             spawnNewCandy()
-            
         }
     }
     
     func pauseGame() {
         isPaused = true
+        timer?.invalidate()
     }
     
     func resumeGame() {
         isPaused = false
+        startCandySpawner()
     }
     
     private func startCandySpawner() {
@@ -59,20 +61,20 @@ class CandyViewModel: ObservableObject {
         }
     }
     
-    func removeCandy(_ candy: CandyModel) {
-        candies.removeAll { $0.id == candy.id }
-    }
-    
     private func spawnNewCandy() {
         if Double.random(in: 0...1) < 0.02 {
             candies.append(CandyModel(screenWidth: screenWidth))
         }
     }
     
-     func updateCandyPositions() {
+    func updateCandyPositions() {
         for i in 0..<candies.count {
             candies[i].position.y += candies[i].speed * 0.05
         }
+        checkGameOver()
+    }
+
+    private func checkGameOver() {
         if candies.contains(where: { $0.position.y > screenHeight + 100 }) {
             gameOver()
         }
@@ -85,6 +87,44 @@ class CandyViewModel: ObservableObject {
         if score > bestScore {
             bestScore = score
             UserDefaults.standard.set(bestScore, forKey: "BestScore")
+        }
+        GameDataManager.shared.clearSavedGame()
+    }
+    
+    func loadState(_ state: CandyState) {
+        self.candies = state.candies
+        self.score = state.score
+        self.isGameOver = state.isGameOver
+        self.isPaused = true // Загруженная игра должна быть на паузе
+    }
+    
+    func checkCollisionsAndRemove(characterFrame: CGRect, onCollision: @escaping (CandyModel) -> Void) {
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            guard let self = self else { return }
+            
+            var collidedCandies: [CandyModel] = []
+            var newScore = self.score
+            
+            for candy in self.candies {
+                let candyFrame = CGRect(x: candy.position.x - 25,
+                                        y: candy.position.y - 25,
+                                        width: 50, height: 50)
+                
+                if characterFrame.intersects(candyFrame) {
+                    collidedCandies.append(candy)
+                    newScore += 1
+                    DispatchQueue.main.async {
+                        onCollision(candy)
+                    }
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.candies.removeAll { candy in
+                    collidedCandies.contains { $0.id == candy.id }
+                }
+                self.score = newScore
+            }
         }
     }
     

@@ -4,7 +4,6 @@
 //
 //  Created by Ivan Elonov on 04.07.2024.
 //
-
 import SwiftUI
 
 struct PauseView: View {
